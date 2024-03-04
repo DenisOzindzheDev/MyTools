@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+  chatops-db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user
+      POSTGRES_DB : debug
+    volumes:
+      - chatops-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    #TODO : healthcheck
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+  #TODO: exporter prometheuscommunity/postgres-exporter:v0.10.1
+volumes:
+  chatops-data:
